@@ -1,0 +1,8 @@
+<div>
+  <p><strong>List:</strong> <%= "#{@list.name}" %></p>
+  <% @list.movies.each do |movie| %>
+    <p><%= movie.title %></p>
+    <% bookmark = Bookmark.where(list: @list).where(movie: movie) %>
+    <p>bookmark: <%= bookmark[0].comment %></p>
+  <% end %>
+</div>
