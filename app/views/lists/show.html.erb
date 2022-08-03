@@ -1,8 +1,31 @@
-<div>
-  <p><strong>List:</strong> <%= "#{@list.name}" %></p>
-  <% @list.movies.each do |movie| %>
-    <p><%= movie.title %></p>
-    <% bookmark = Bookmark.where(list: @list).where(movie: movie) %>
-    <p>bookmark: <%= bookmark[0].comment %></p>
-  <% end %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.image_url.length > 0 ? @list.image_url : "https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" %>;">
+  <div class="container">
+    <h1><%= @list.name %></h1>
+  </div>
+</div>
+
+<div class="container my-3">
+  <div class="row">
+      <div class="col-12 d-flex justify-content-end">
+        <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-flat" %>
+      </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <% @list.movies.each do |movie| %>
+      <div class="col-5">
+        <div class="card-trip m-3">
+          <img src=<%= movie.poster_url %> />
+          <div class="px-3 pt-2">
+            <h2 class="d-inline"><%= movie.title %></h2> • <span><%= movie.rating %><i class="fa-solid fa-star"></i></span>
+            <p><%= movie.overview %></p>
+          </div>
+          <div class="card-trip-footer px-3 py-2">
+            <% bookmark = Bookmark.where(list: @list).where(movie: movie) %>
+            <p><i class="fa-solid fa-quote-left"></i> <strong><%= bookmark[0].comment %></strong></p>
+            <p><%= link_to "Delete", bookmark_path(bookmark[0]), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
+          </div>
+        </div>
+      </div>
+     <% end %>
+  </div>
 </div>
