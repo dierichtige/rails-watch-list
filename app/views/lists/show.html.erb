@@ -7,7 +7,10 @@
 <div class="container my-3">
   <div class="row">
       <div class="col-12 d-flex justify-content-end">
-        <%= link_to "Add a movie", new_list_bookmark_path(@list), class: "btn btn-flat" %>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-flat" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add a movie
+        </button>
       </div>
   </div>
   <div class="row d-flex justify-content-center">
@@ -29,3 +32,33 @@
      <% end %>
   </div>
 </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h1>Create a bookmark</h1>
+            <%= simple_form_for [@list, @bookmark] do |f| %>
+              <%= f.association :movie %>
+              <%= f.input :comment %>
+              <div class="modal-footer">
+                <%= f.submit %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @bookmark.errors.present? %>
+    <script>
+        $(window).load(function () {
+            $('#exampleModal').modal('show');
+            });
+    </script>
+<% end  %>
