@@ -10,12 +10,22 @@ class BookmarksController < ApplicationController
     @list = List.find(params[:list_id])
     @bookmark = Bookmark.new(bookmark_params)
     @bookmark.list = @list
-    if @bookmark.save
-      redirect_to list_path(@list)
-    else
-      # render 'new', status: :unprocessable_entity => orig code with 'new' action for bookmark
-      render 'lists/show', status: :unprocessable_entity
+
+    respond_to do |format|
+      if @bookmark.save
+        format.html { redirect_to list_path(@list) }
+      else
+        format.html { render 'lists/show', status: :unprocessable_entity }
+        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :form_update, status: :unprocessable_entity }
+      end
     end
+    # if @bookmark.save
+    #   redirect_to list_path(@list)
+    # else
+    #   render 'new', status: :unprocessable_entity => orig code with 'new' action for bookmark
+    #   render 'lists/show', status: :unprocessable_entity
+    # end
     # raise
   end
 
