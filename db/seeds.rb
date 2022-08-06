@@ -41,9 +41,20 @@ puts "Finished creating movies!"
 puts "Cleaning lists database..."
 List.destroy_all
 
-List.create(name: "History", image_url: "https://images.unsplash.com/photo-1515325595179-59cd5262ca53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80")
-List.create(name: "Mystery", image_url: "https://images.unsplash.com/photo-1523804427826-322aa3cfaa42?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80")
-List.create(name: "Non-English", image_url: "https://images.unsplash.com/photo-1505782045004-7a51dc8e0ece?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=897&q=80")
+file = URI.open("https://images.unsplash.com/photo-1515325595179-59cd5262ca53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80")
+list = List.new(name: "History")
+list.photo.attach(io: file, filename: "history.jpg", content_type: "image/jpg")
+list.save
+
+file = URI.open("https://images.unsplash.com/photo-1523804427826-322aa3cfaa42?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80")
+list = List.new(name: "Mystery")
+list.photo.attach(io: file, filename: "mystery.jpg", content_type: "image/jpg")
+list.save
+
+file = URI.open("https://images.unsplash.com/photo-1505782045004-7a51dc8e0ece?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=897&q=80")
+list = List.new(name: "Non-English")
+list.photo.attach(io: file, filename: "non-english.jpg", content_type: "image/jpg")
+list.save
 
 puts "Finished creating lists!"
 
