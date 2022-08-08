@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "remote_modal" do %>
-  <div class="modal fade" id="shareRecipeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-controller="remote-modal" data-action="turbo:before-render@document->remote-modal#hideBeforeRender">
+  <div class="modal fade" id="shareRecipeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-controller="remote-modal" data-turbo-cache="false" data-action="turbo:before-render@document->remote-modal#hideBeforeRender">
     <div class="modal-dialog" role="document">
       <div class="modal-content" id="modal_content">
         <div class="modal-header">
