@@ -1,5 +1,5 @@
 <%= simple_form_for [list, bookmark] do |f| %>
-  <%= f.association :movie %>
+  <%= f.association :movie, input_html: { data: { controller: "tom-select" }} %>
   <%= f.input :comment %>
   <div class="modal-footer">
     <%= f.submit %>
